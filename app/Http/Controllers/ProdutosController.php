@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Produto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class ProdutosController extends Controller
 {
@@ -36,18 +37,32 @@ class ProdutosController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $messages = [
+            'nomeProd.required' => 'O campo Nome do Produto é obrigatório.',
+            'precoProd.required' => 'O campo Preço do Produto é obrigatório.',
+            'precoProd.numeric' => 'O campo Preço do Produto deve ser um número.',
+            'descricaoProd.required' => 'O campo Descrição é obrigatório.',
+            // Adicione mais mensagens personalizadas conforme necessário
+        ];
+    
+        $validator = Validator::make($request->all(), [
             'nomeProd' => 'required',
-            'precoProd' => 'required',
+            'precoProd' => 'required|numeric',
             'descricaoProd' => 'required',
-            'ativo' => 'required',
             'tipo' => 'required'
-        ]);
+        ], $messages);
+    
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+    
 
         $nomeProd = $request->input('nomeProd');
         $precoProd = $request->input('precoProd');
         $descricaoProd = $request->input('descricaoProd');
-        $ativo = $request->input('ativo');
+        $ativo = $request->input('ativo') ? 1 : 0; // Defina como 1 se estiver selecionado no formulário, senão, 0
         $tipo = $request->input('tipo');
 
         DB::table('produtos')->insert([
@@ -58,7 +73,14 @@ class ProdutosController extends Controller
             'tipo' => $tipo
         ]);
 
-        return redirect('/confirmacao')->with('success', 'Produto cadastrado com sucesso!');
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        return back()->with('success', 'Produto cadastrado com sucesso!');
+
     }
 
     /**
