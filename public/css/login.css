@@ -1,0 +1,12 @@
+*{
+    font-family: 'Roboto';
+}
+
+.principal{
+    background-color: #DAA520;
+}
+
+.tituloP{
+    text-align: left;
+    margin-left: 10px;
+}
