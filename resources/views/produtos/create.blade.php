@@ -44,7 +44,7 @@
         checkbox.checked = hiddenInput.value == 1 ? true : false;
         });
 
-    
+
 
     // Variável para rastrear se o campo "ativo" já foi marcado
     let ativoJaMarcado = false;
@@ -66,7 +66,7 @@
     });
 
     </script>
-        
+
     <br>
         <div class="form-group">
         <select name="tipo" class="form-select" aria-label="Default select example">
@@ -82,7 +82,7 @@
             </div>
         @endif
 
-    
+
 
 
     </form>

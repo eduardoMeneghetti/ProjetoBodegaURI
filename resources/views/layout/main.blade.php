@@ -21,12 +21,12 @@
     <h1 class="tituloP">Bodega Software</h1>
     <p>Seu software de gerenciamento</p>
     <br>
-    <br>
     <div class="container">
 
     @yield('conteudo')
 
     </div>
+<br>
 <footer class="footer">
     <p>Direitos reservados @bodega 2023</p>
 </footer>

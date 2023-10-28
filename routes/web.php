@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FuncionariosController;
+use App\Http\Controllers\PedidosController;
 use App\Http\Controllers\ProdutosController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,7 @@ Route::get('/index',[ProdutosController::class,'index']);
 Route::get('/create',[ProdutosController::class,'create']);
 Route::post('/create',[ProdutosController::class,'store']);
 
-Route::get('/confirmacao', function(){
-    return view('/confirmacao');
-});
+//rotas de referencia a pedidos
+Route::get('/fazerpedido',[PedidosController::class,'index']);
+Route::post('/fazerpedido', [PedidosController::class,'store']);
+

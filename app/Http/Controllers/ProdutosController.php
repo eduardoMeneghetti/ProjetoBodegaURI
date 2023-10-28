@@ -44,20 +44,20 @@ class ProdutosController extends Controller
             'descricaoProd.required' => 'O campo Descrição é obrigatório.',
             // Adicione mais mensagens personalizadas conforme necessário
         ];
-    
+
         $validator = Validator::make($request->all(), [
             'nomeProd' => 'required',
             'precoProd' => 'required|numeric',
             'descricaoProd' => 'required',
             'tipo' => 'required'
         ], $messages);
-    
+
         if ($validator->fails()) {
             return back()
                 ->withErrors($validator)
                 ->withInput();
         }
-    
+
 
         $nomeProd = $request->input('nomeProd');
         $precoProd = $request->input('precoProd');
