@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Estoque;
 use App\Models\ItemPedido;
 use App\Models\Pedido;
 use App\Models\Produto;
@@ -43,6 +44,14 @@ class PedidosController extends Controller
     {
         //dd($request->all());
 
+        $request->validate([
+            'idProd' => 'required|array|min:1', // 'idProd' deve ser um array com pelo menos 1 elemento
+            'qtdItem' => 'required|array|min:1', // 'qtdItem' deve ser um array com pelo menos 1 elemento
+        ], [
+            'idProd.required' => 'Selecione pelo menos um produto.',
+            'qtdItem.required' => 'Informe a quantidade para o(s) produto(s) selecionado(s).',
+        ]);
+
         $pedido = Pedido::create([
             'dtPed' => $request->input('dtPed'),
             'totalPedido' => $request->input('totalPedido'),
@@ -60,20 +69,49 @@ class PedidosController extends Controller
             $valorTotal = $precoProd * $qtdItemPed;
 
             $item = new ItemPedido([
-                'idPed' => $pedido->idPed,
+                'idPed' => $pedido->id,
                 'idProd' => $idProduto,
                 'qtdItemPed' => $qtdItemPed,
                 'valorUnItem' => $precoProd,
                 'valorTotal' => $valorTotal
             ]);
-            $item->save();
+
+            try {
+                $item->pedido()->associate($pedido);
+                $item->save();
+
+                $produto = Estoque::where('idProd', $idProduto)->first();
+
+                //dd('Quantidade Atual: ' . $produto->qtdEst, 'Quantidade a ser subtraída: ' . $qtdItemPed);
+                if ($produto) {
+                    $produto->qtdEst = max(0, $produto->qtdEst- $qtdItemPed);
+                    $produto->save();
+                }
+            } catch (Exception $e) {
+                dd($e->getMessage());
+                session()->flash('erro', 'Ocorreu um erro ao processar o pedido.');
+                return redirect()->back();
+            }
         }
 
+        $ultimoPedido = Pedido::latest('idPed')->first();
 
-        $pedido->update([
+        if ($ultimoPedido) {
+        $idPed = $ultimoPedido->idPed;
+
+        $totalItens = ItemPedido::where('idPed', $idPed)->sum('valorTotal');
+
+        $ultimoPedido->update([
             'dtPed' => Carbon::now(),
-            'totalPedido' => 22.2,
-       ]);
+            'totalPedido' =>  $totalItens,
+            ]);
+
+        } else {
+            session()->flash('erroValorT', 'Não foi possível colocar o valor total');
+            return redirect()->back();
+        }
+        session()->flash('pedidoEnviado', 'Pedido enviado com sucesso');
+        return redirect()->back();
 
 
     }
