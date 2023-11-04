@@ -2,7 +2,12 @@
 
 @section('conteudo')
 <div id="event-create-container" class="col-md-6 offset-md-3">
-    <h1>Cadastro de produtos<h1>
+@if(session('success'))
+    <div class="alert alert-success">
+{{ session('success') }}
+</div>
+@endif
+    <h3 class="tituloFuncao">Cadastro de produtos<h3>
     <br>
     <form action="/create" method="post">
     @csrf
@@ -76,11 +81,6 @@
         </select>
         </div>
         <input type="submit" class="btn btn-primary" value="cadastrar">
-        @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
 
     </form>
 </div>

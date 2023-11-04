@@ -10,8 +10,9 @@ class Produto extends Model
     protected $table = 'produtos';
     protected $fillable = array('idProd','nomeProd', 'precoProd', 'descricaoProd', 'ativo','tipo');
     public $timestamps = false;
-    public function itemDoPedido(){
-        return $this->hasOne(ItemPedido::class, 'idProd');
+    public function estoque() {
+        return $this->hasOne(Estoque::class, 'idProd', 'idProd');
     }
+
 
 }

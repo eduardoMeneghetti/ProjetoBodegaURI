@@ -13,8 +13,8 @@ class Estoque extends Model
 
     public $timestamps = false;
 
-    public function produto()
-    {
-        return $this->belongsTo(Produto::class, 'idProd');
+    public function produto() {
+        return $this->belongsTo(Produto::class, 'idProd', 'idProd');
     }
+
 }

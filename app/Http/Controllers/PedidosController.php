@@ -20,7 +20,9 @@ class PedidosController extends Controller
      */
     public function index()
     {
-        $produtos = Produto::all();
+        $produtos = Produto::whereHas('estoque', function($query) {
+            $query->where('qtdEst', '>', 0);
+        })->get();
         return view('pedidos.fazerpedido', compact('produtos'));
     }
 
@@ -45,11 +47,13 @@ class PedidosController extends Controller
         //dd($request->all());
 
         $request->validate([
-            'idProd' => 'required|array|min:1', // 'idProd' deve ser um array com pelo menos 1 elemento
-            'qtdItem' => 'required|array|min:1', // 'qtdItem' deve ser um array com pelo menos 1 elemento
+            'idProd' => 'required|array|min:1',
+            'qtdItem' => 'required|array|min:1',
+            'mesa' => 'required'
         ], [
             'idProd.required' => 'Selecione pelo menos um produto.',
             'qtdItem.required' => 'Informe a quantidade para o(s) produto(s) selecionado(s).',
+            'mesa.required' => 'Mesa não foi preenchido'
         ]);
 
         $pedido = Pedido::create([
@@ -57,8 +61,7 @@ class PedidosController extends Controller
             'totalPedido' => $request->input('totalPedido'),
             'mesa' => 1,
             'obsPed' => $request->input('obsPed'),
-            'idFunc' => $request->input('idFunc'),
-            'liberado' => 'N',
+            'idFunc' => $request->input('idFunc')
         ]);
 
         $idProdutos = $request->input('idProd');
@@ -73,7 +76,8 @@ class PedidosController extends Controller
                 'idProd' => $idProduto,
                 'qtdItemPed' => $qtdItemPed,
                 'valorUnItem' => $precoProd,
-                'valorTotal' => $valorTotal
+                'valorTotal' => $valorTotal,
+                'liberado' => 'N'
             ]);
 
             try {
@@ -98,12 +102,15 @@ class PedidosController extends Controller
 
         if ($ultimoPedido) {
         $idPed = $ultimoPedido->idPed;
-
+        $mesa = $request->input('mesa');
+        $obsPedido = $request->input('obsPed');
         $totalItens = ItemPedido::where('idPed', $idPed)->sum('valorTotal');
 
         $ultimoPedido->update([
             'dtPed' => Carbon::now(),
             'totalPedido' =>  $totalItens,
+            'mesa' => $mesa,
+            'obsPedido' => $obsPedido
             ]);
 
         } else {

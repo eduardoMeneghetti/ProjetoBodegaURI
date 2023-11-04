@@ -47,10 +47,19 @@ class FuncionariosController extends Controller
         $senha = $request->input('senha');
 
         $usuarioDB = DB::table('funcionarios')->where('nomeFunc', $usuario)->first();
+        $idFunc = DB::table('funcionarios')->where('nomeFunc', $usuario)->value('idFunc');
+        $funcaoFunc = DB::table('funcionarios')->where('idFunc', $idFunc)->value('funcaoSistema');
 
         if ($usuarioDB && $senha == $usuarioDB->senha) {
             //Deu certo o login do usuários
-            return redirect('/index')->with('success', 'Login Realizado com Sucesso!');
+            if($funcaoFunc == 'M'){
+                return redirect('/index')->with('success', 'Login Realizado com Sucesso!');
+            }else if($funcaoFunc == 'A'){
+                return redirect('/fazerpedido')->with('success', 'Login Realizado com Sucesso!');
+            }else if($funcaoFunc == 'C'){
+                return redirect('/create')->with('success', 'Login Realizado com Sucesso!');
+            }
+
         } else {
             // Caso o usuário não exista será apresentado essa mensagem que pode ser "configurada" na
             //página de login mesmo, só utilizar o metodo session e  usar o "erro" (nome da chamada de erro)

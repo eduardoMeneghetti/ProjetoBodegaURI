@@ -9,7 +9,7 @@ class Pedido extends Model
 {
     protected $table = 'pedidos';
     protected $primaryKey = 'idPed';
-    protected $fillable = array('idPed', 'dtPed', 'totalPedido', 'mesa', 'obsPed', 'idFunc', 'liberado') ;
+    protected $fillable = array('idPed', 'dtPed', 'totalPedido', 'mesa', 'obsPed', 'idFunc') ;
     public $timestamps = false;
 
 

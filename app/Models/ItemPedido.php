@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ItemPedido extends Model
 {
     protected $table = 'intempedidos';
-    protected $fillable = array('idItemPed', 'idPed', 'idProd', 'qtdItemPed', 'valorUnItem', 'valorTotal');
+    protected $fillable = array('idItemPed', 'idPed', 'idProd', 'qtdItemPed', 'valorUnItem', 'valorTotal', 'liberado');
     public $timestamps = false;
 
     public function pedido()
