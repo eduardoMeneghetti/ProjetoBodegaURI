@@ -1,8 +1,5 @@
 <?php
 
-use App\Http\Controllers\CozinhaController;
-use App\Http\Controllers\FuncionariosController;
-use App\Http\Controllers\PedidosController;
 use App\Http\Controllers\ProdutosController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,23 +14,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Página ínicial
-Route::get('/',[FuncionariosController::class,'index']);
-Route::post('/',[FuncionariosController::class,'store']);
+Route::get('/', function () {
+    return view('welcome');
+});
 
-//Página da listagem de produtos
 Route::get('/index',[ProdutosController::class,'index']);
-Route::post('/index',[ProdutosController::class,'edit']);
 
 //Formulario para adicionar novos produtos
 Route::get('/create',[ProdutosController::class,'create']);
 Route::post('/create',[ProdutosController::class,'store']);
+Route::get('/movimentacao',[ProdutosController::class,'movimentacao']);
+Route::post('/movimentacao', [ProdutosController::class,'movimentacaoEstoque']);
+Route::get('/produtos/{idProd}/editar', [ProdutosController::class,'editar']);
+Route::patch('/produtos/{id}/atualizar', [ProdutosController::class,'atualizar']);
 
-//rotas de referencia a pedidos
-Route::get('/fazerpedido',[PedidosController::class,'index']);
-Route::post('/fazerpedido', [PedidosController::class,'store']);
 
-//rotas de referencia a cozinha
-Route::get('/pedidos',[CozinhaController::class,'index']);
-Route::put('/pedidos/{idPed}', [CozinhaController::class, 'store']);
 
+Route::get('/confirmacao', function(){
+    return view('/confirmacao');
+});

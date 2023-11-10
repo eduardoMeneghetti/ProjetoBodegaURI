@@ -3,11 +3,6 @@
 @section('conteudo')
 <h1>Listagem de produtos</h1>
         <table class="table table-striped table-bordered table-hover">
-            <thead>
-                <tr>
-                <th style="text-align:center">Nome produto</th>
-                </tr>
-            </thead>
             @foreach ($produtos as $p)
                 <tr>
                     <td>{{ $p->nomeProd }}</td>
@@ -25,8 +20,9 @@
                         Bebida
                         @endif
                     </td>
-                    <td><button type="button" class="btn btn-success">editar</button></td>
+                    <td>{{ $p->qtdEst }}</td>
+                    <td><a href="{{ route('produtos.editar', ['idProd' => $p->idProd]) }}" class="btn btn-success">Editar</a>
                 </tr>
             @endforeach
-        </table>
+        </table>
 @endsection('conteudo')

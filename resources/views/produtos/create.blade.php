@@ -2,12 +2,7 @@
 
 @section('conteudo')
 <div id="event-create-container" class="col-md-6 offset-md-3">
-@if(session('success'))
-    <div class="alert alert-success">
-{{ session('success') }}
-</div>
-@endif
-    <h3 class="tituloFuncao">Cadastro de produtos<h3>
+    <h1>Cadastro de produtos<h1>
     <br>
     <form action="/create" method="post">
     @csrf
@@ -26,7 +21,7 @@
             @enderror
         </div>
         <div class="form-group">
-            <label class="form-check-label">Descição do Produto</label>
+            <label class="form-check-label">Descrição do Produto</label>
             <textarea name="descricaoProd" id="descricaoProd" class="form-control" placeholder="peso, etc, etc"></textarea>
             @error('descricaoProd')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -49,9 +44,9 @@
         checkbox.checked = hiddenInput.value == 1 ? true : false;
         });
 
+    
 
-
-    // Variável para rastrear se o campo "ativo" já foi marcado
+        // Variável para rastrear se o campo "ativo" já foi marcado
     let ativoJaMarcado = false;
 
     // Obtém todos os campos de entrada dentro do formulário
@@ -60,6 +55,7 @@
     // Obtém o campo "ativo"
     const ativoCheckbox = document.getElementById('ativo');
 
+    // Adiciona um ouvinte de evento de clique a todos os campos de entrada
     formFields.forEach((field) => {
         field.addEventListener('click', function() {
             // Marca o campo "ativo" apenas se ainda não foi marcado
@@ -71,7 +67,7 @@
     });
 
     </script>
-
+        
     <br>
         <div class="form-group">
         <select name="tipo" class="form-select" aria-label="Default select example">
@@ -81,6 +77,14 @@
         </select>
         </div>
         <input type="submit" class="btn btn-primary" value="cadastrar">
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+    
+
 
     </form>
 </div>
