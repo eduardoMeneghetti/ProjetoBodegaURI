@@ -29,7 +29,39 @@ Route::get('/produtos/{idProd}/editar', [ProdutosController::class,'editar']);
 Route::patch('/produtos/{id}/atualizar', [ProdutosController::class,'atualizar']);
 
 
+<<<<<<< Updated upstream
+=======
+//rotas de referencia a cozinha alteração de status
+Route::get('/pedidos',[CozinhaController::class,'index']);
+Route::get('/pedidos/{id}/edit', [CozinhaController::class, 'edit'])->name('pedidos.edit');
+Route::post('/pedidos/{id}/edit',[CozinhaController::class,'edit']);
+Route::get('/pedidosProntos',[CozinhaController::class,'create']);
+Route::get('/pedidosAdm',[CozinhaController::class,'indexAdm']);
 
-Route::get('/confirmacao', function(){
-    return view('/confirmacao');
-});
+//rota view de escolhas ADMINISTRADOR
+Route::view('/principal','principal');
+Route::view('/SemPagina','semPagina');
+
+
+>>>>>>> Stashed changes
+Página ínicial
+Route::post('/',[FuncionariosController::class,'store']);
+
+//Página da listagem de produtos
+Route::get('/index',[ProdutosController::class,'index']);
+Route::post('/index',[ProdutosController::class,'edit']);
+
+//rotas de referencia a pedidos
+Route::get('/fazerpedido',[PedidosController::class,'index']);
+Route::post('/fazerpedido', [PedidosController::class,'store']);
+
+//rotas de referencia a cozinha alteração de status
+Route::get('/pedidos',[CozinhaController::class,'index']);
+Route::get('/pedidos/{id}/edit', [CozinhaController::class, 'edit'])->name('pedidos.edit');
+Route::post('/pedidos/{id}/edit',[CozinhaController::class,'edit']);
+Route::get('/pedidosProntos',[CozinhaController::class,'create']);
+Route::get('/pedidosAdm',[CozinhaController::class,'indexAdm']);
+
+//rota view de escolhas ADMINISTRADOR
+Route::view('/principal','principal');
+Route::view('/SemPagina','semPagina');

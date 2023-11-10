@@ -53,11 +53,11 @@ class FuncionariosController extends Controller
         if ($usuarioDB && $senha == $usuarioDB->senha) {
             //Deu certo o login do usuários
             if($funcaoFunc == 'M'){
-                return redirect('/index')->with('success', 'Login Realizado com Sucesso!');
+                return redirect('/principal')->with('success', 'Login Realizado com Sucesso!');
             }else if($funcaoFunc == 'A'){
                 return redirect('/fazerpedido')->with('success', 'Login Realizado com Sucesso!');
             }else if($funcaoFunc == 'C'){
-                return redirect('/create')->with('success', 'Login Realizado com Sucesso!');
+                return redirect('/pedidos')->with('success', 'Login Realizado com Sucesso!');
             }
 
         } else {

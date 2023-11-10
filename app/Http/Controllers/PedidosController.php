@@ -33,7 +33,7 @@ class PedidosController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**

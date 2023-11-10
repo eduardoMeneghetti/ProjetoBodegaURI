@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ItemPedido;
 use App\Models\Pedido;
 use Illuminate\Http\Request;
 
@@ -14,14 +15,29 @@ class CozinhaController extends Controller
      */
     public function index()
     {
+
+    $pedidos = Pedido::join('intempedidos', 'pedidos.idPed', '=', 'intempedidos.idPed')
+    ->join('produtos', 'produtos.idProd', '=', 'intempedidos.idProd')
+    ->where('liberado', 'N')
+    ->selectRaw('*, DATE_FORMAT(dtPed, "%d/%m/%Y %H:%i:%s") as dataPedidoFormatada')
+    ->orderBy('pedidos.idPed', 'asc') // Ordena pelo ID do pedido em ordem crescente
+    ->get();
+
+    return view('cozinha.pedidos', compact('pedidos'));
+
+
+    }
+
+    public function indexAdm()
+    {
         $pedidos = Pedido::join('intempedidos', 'pedidos.idPed', '=', 'intempedidos.idPed')
         ->join('produtos', 'produtos.idProd', '=', 'intempedidos.idProd')
         ->where('liberado', 'N')
         ->selectRaw('*, DATE_FORMAT(dtPed, "%d/%m/%Y %H:%i:%s") as dataPedidoFormatada')
+        ->orderBy('pedidos.idPed', 'asc') // Ordena pelo ID do pedido em ordem crescente
         ->get();
 
-        return view('cozinha.pedidos', compact('pedidos'));
-
+        return view('cozinha.pedidosAdm', compact('pedidos'));
     }
 
     /**
@@ -31,7 +47,14 @@ class CozinhaController extends Controller
      */
     public function create()
     {
-        //
+        $pedidos = Pedido::join('intempedidos', 'pedidos.idPed', '=', 'intempedidos.idPed')
+        ->join('produtos', 'produtos.idProd', '=', 'intempedidos.idProd')
+        ->where('liberado', 'S')
+        ->selectRaw('*, DATE_FORMAT(dtPed, "%d/%m/%Y %H:%i:%s") as dataPedidoFormatada')
+        ->orderBy('pedidos.idPed', 'asc') // Ordena pelo ID do pedido em ordem crescente
+        ->get();
+
+        return view('cozinha.pedidosProntos', compact('pedidos'));
     }
 
     /**
@@ -42,16 +65,7 @@ class CozinhaController extends Controller
      */
     public function store(Request $request)
     {
-        $itemPedido = itemPedido::find($request->idPed);
-
-        if (!$itemPedido) {
-            return response()->json(['mensagem' => 'Item do pedido não encontrado'], 404);
-        }
-
-        $itemPedido->update(['liberado' => 'S']);
-
-        return response()->json(['mensagem' => 'Situação do item do pedido atualizada com sucesso']);
-
+        //
     }
 
     /**
@@ -73,7 +87,16 @@ class CozinhaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $itemPedido = ItemPedido::where('idItemPed', $id)->first();
+        //dd($itemPedido);
+
+        if ($itemPedido) {
+            $itemPedido->liberado = 'S';
+            $itemPedido->save();
+            return redirect('/pedidos')->with('success', 'Pedido enviado com sucesso');
+        } else {
+            return redirect('/pedidos')->with('error', 'Erro ao enviar o pedido');
+        }
     }
 
     /**

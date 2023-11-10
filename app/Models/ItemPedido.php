@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ItemPedido extends Model
 {
     protected $table = 'intempedidos';
+    protected $primaryKey = 'idItemPed';
     protected $fillable = array('idItemPed', 'idPed', 'idProd', 'qtdItemPed', 'valorUnItem', 'valorTotal', 'liberado');
     public $timestamps = false;
 

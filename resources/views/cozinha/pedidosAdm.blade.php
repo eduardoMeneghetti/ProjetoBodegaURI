@@ -11,7 +11,6 @@
         <th style="text-align:center">Mesa</th>
         <th style="text-align:center">Observações</th>
         <th style="text-align:center">Nome do Produto</th>
-        <th style="text-align:center">Enviar pedido</th>
     </thead>
     <tbody>
         @foreach ($pedidos as $p)
@@ -21,12 +20,6 @@
                 <td style="text-align:center">{{ $p->mesa }}</td>
                 <td style="text-align:center">{{ $p->obsPed }}</td>
                 <td style="text-align:center">{{ $p->nomeProd }}</td>
-                <td>
-                <form action="/pedidos/{{ $p->idItemPed }}/edit" method="POST">
-                @csrf
-                <button type="submit" class="btn btn-success">Enviar</button>
-                </form>
-                </td>
             </tr>
         @endforeach
     </tbody>
