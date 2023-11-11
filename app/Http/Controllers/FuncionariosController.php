@@ -39,8 +39,8 @@ class FuncionariosController extends Controller
             'usuario' => 'required',
             'senha' => 'required'
         ],[
-            'usuario.required' => 'Campo obrigatório não preenchido',
-            'senha.required' => 'Campo obrigatório não preenchido'
+            'usuario.required' => 'Campo obrigatório não preenchido: ',
+            'senha.required' => 'Campo obrigatório não preenchido: '
         ]);
 
         $usuario = $request->input('usuario');

@@ -44,27 +44,45 @@ class PedidosController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
-
+        //dd($request->all();
         $request->validate([
             'idProd' => 'required|array|min:1',
             'qtdItem' => 'required|array|min:1',
-            'mesa' => 'required'
+            'mesa' => 'required',
         ], [
             'idProd.required' => 'Selecione pelo menos um produto.',
             'qtdItem.required' => 'Informe a quantidade para o(s) produto(s) selecionado(s).',
-            'mesa.required' => 'Mesa não foi preenchido'
+            'mesa.required' => 'Mesa não foi preenchida',
         ]);
 
+        $idProdutos = $request->input('idProd');
+
+        // Verificar se o estoque é suficiente para todos os itens do pedido
+        $estoqueSuficiente = true;
+
+        foreach ($idProdutos as $idProduto) {
+            $qtdItemPed = $request->input('qtdItem')[$idProduto];
+            $produto = Estoque::where('idProd', $idProduto)->first();
+
+            if ($produto->qtdEst < $qtdItemPed) {
+                $estoqueSuficiente = false;
+                session()->flash('erroEstoque', 'Estoque insuficiente para o produto ID: ' . $idProduto);
+                break;
+            }
+        }
+
+        if (!$estoqueSuficiente) {
+            return redirect()->back();
+        }
+
+        // Continuar com o processo se o estoque for suficiente
         $pedido = Pedido::create([
             'dtPed' => $request->input('dtPed'),
             'totalPedido' => $request->input('totalPedido'),
             'mesa' => 1,
             'obsPed' => $request->input('obsPed'),
-            'idFunc' => $request->input('idFunc')
+            'idFunc' => $request->input('idFunc'),
         ]);
-
-        $idProdutos = $request->input('idProd');
 
         foreach ($idProdutos as $idProduto) {
             $precoProd = DB::table('produtos')->where('idProd', $idProduto)->value('precoProd');
@@ -77,20 +95,17 @@ class PedidosController extends Controller
                 'qtdItemPed' => $qtdItemPed,
                 'valorUnItem' => $precoProd,
                 'valorTotal' => $valorTotal,
-                'liberado' => 'N'
+                'liberado' => 'N',
             ]);
 
             try {
                 $item->pedido()->associate($pedido);
                 $item->save();
 
+                // Decrementar o estoque
                 $produto = Estoque::where('idProd', $idProduto)->first();
-
-                //dd('Quantidade Atual: ' . $produto->qtdEst, 'Quantidade a ser subtraída: ' . $qtdItemPed);
-                if ($produto) {
-                    $produto->qtdEst = max(0, $produto->qtdEst- $qtdItemPed);
-                    $produto->save();
-                }
+                $produto->qtdEst = max(0, $produto->qtdEst - $qtdItemPed);
+                $produto->save();
             } catch (Exception $e) {
                 dd($e->getMessage());
                 session()->flash('erro', 'Ocorreu um erro ao processar o pedido.');

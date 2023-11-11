@@ -4,6 +4,7 @@ use App\Http\Controllers\CozinhaController;
 use App\Http\Controllers\FuncionariosController;
 use App\Http\Controllers\PedidosController;
 use App\Http\Controllers\ProdutosController;
+use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +21,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//Formulario de login
 Route::get('/',[FuncionariosController::class,'index']);
 Route::post('/',[FuncionariosController::class,'store']);
 
@@ -64,3 +67,12 @@ Route::get('/pedidosAdm',[CozinhaController::class,'indexAdm']);
 //rota view de escolhas ADMINISTRADOR
 Route::view('/principal','principal');
 Route::view('/SemPagina','semPagina');
+
+
+//formularios para cadastro e edição de funcionários.
+Route::get('/createUser',[UsuarioController::class,'index']);
+Route::post('/createUser',[UsuarioController::class,'create']);
+Route::get('/indexFunc',[UsuarioController::class,'indexList']);
+Route::get('/createUser/{id}/edit',[UsuarioController::class,'edit']);
+Route::post('/createUser/{id}/edit',[UsuarioController::class,'edit']);
+Route::put('/createUser/{id}',[UsuarioController::class,'update'])->name('funcionarios-update');

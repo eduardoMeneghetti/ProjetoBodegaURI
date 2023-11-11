@@ -28,7 +28,7 @@
                     <option placeholder="Saída" value="S">Saída</option>
                 </select>
                 <label for="dtMov">Data:</label>
-                <input type="date" name="dtMov" id="date" placeholder="dd/mm/aaaa" value="{{ date('Y-m-d') }}">
+                <input type="date" name="dtMov" id="date" placeholder="dd/mm/aaaa" value="{{ date('Y-m-d H:i:s') }}">
                 @error('dtMov')
                 <div class="alert alert-danger">{{ $message }}</div>
                 @enderror

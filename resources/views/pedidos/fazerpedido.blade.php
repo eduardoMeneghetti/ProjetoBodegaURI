@@ -11,6 +11,11 @@
         {{ session('pedidoEnviado') }}
     </div>
     @endif
+    @if(session('erroEstoque'))
+    <div class="alert alert-danger">
+        {{ session('erroEstoque') }}
+    </div>
+    @endif
     @if(session('erro'))
     <div class="alert alert-danger">
         {{ session('erro') }}
