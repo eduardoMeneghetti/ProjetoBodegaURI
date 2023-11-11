@@ -14,8 +14,11 @@ class Produto extends Model
     {
         return static::all();
     }
+    public function estoque() {
+        return $this->hasOne(Estoque::class, 'idProd', 'idProd');
+    }
 
-    
+
 }
 
 

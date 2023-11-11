@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\CozinhaController;
+use App\Http\Controllers\FuncionariosController;
+use App\Http\Controllers\PedidosController;
 use App\Http\Controllers\ProdutosController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,12 +20,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/',[FuncionariosController::class,'index']);
+Route::post('/',[FuncionariosController::class,'store']);
 
 Route::get('/index',[ProdutosController::class,'index']);
 
 //Formulario para adicionar novos produtos
 Route::get('/create',[ProdutosController::class,'create']);
 Route::post('/create',[ProdutosController::class,'store']);
+
+//Formulario para movimentação de estoque :P
 Route::get('/movimentacao',[ProdutosController::class,'movimentacao']);
 Route::post('/movimentacao', [ProdutosController::class,'movimentacaoEstoque']);
 Route::get('/produtos/{idProd}/editar', [ProdutosController::class,'editar']);
@@ -38,8 +45,6 @@ Route::get('/pedidosAdm',[CozinhaController::class,'indexAdm']);
 //rota view de escolhas ADMINISTRADOR
 Route::view('/principal','principal');
 Route::view('/SemPagina','semPagina');
-
-Route::post('/',[FuncionariosController::class,'store']);
 
 //Página da listagem de produtos
 Route::get('/index',[ProdutosController::class,'index']);
