@@ -1,7 +1,6 @@
 @extends('layout.main')
 
 @section('conteudo')
-<div id="event-create-container" class="col-md-6 offset-md-3">
     <h1>Cadastro de produtos<h1>
     <br>
     <form action="/create" method="post">
@@ -44,7 +43,7 @@
         checkbox.checked = hiddenInput.value == 1 ? true : false;
         });
 
-    
+
 
         // Variável para rastrear se o campo "ativo" já foi marcado
     let ativoJaMarcado = false;
@@ -67,7 +66,7 @@
     });
 
     </script>
-        
+
     <br>
         <div class="form-group">
         <select name="tipo" class="form-select" aria-label="Default select example">
@@ -76,16 +75,17 @@
         <option value="B">Bebida</option>
         </select>
         </div>
+        <div class="botao">
         <input type="submit" class="btn btn-primary" value="cadastrar">
+        </div>
         @if(session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
             </div>
         @endif
 
-    
+
 
 
     </form>
-</div>
 @endsection
