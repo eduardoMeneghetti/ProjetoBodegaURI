@@ -63,7 +63,7 @@ class FuncionariosController extends Controller
         } else {
             // Caso o usuário não exista será apresentado essa mensagem que pode ser "configurada" na
             //página de login mesmo, só utilizar o metodo session e  usar o "erro" (nome da chamada de erro)
-            session()->flash('erro', 'Credenciais inválidas. Verifique seu e-mail e senha.');
+            session()->flash('erro', 'Credenciais inválidas. Verifique seu Usuário e senha.');
             return redirect()->back();
         }
 

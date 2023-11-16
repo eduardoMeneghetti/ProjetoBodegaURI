@@ -1,32 +1,33 @@
 @extends('layout.main')
-
+<div class="img">
 @section('conteudo')
-<h3 class="tituloFuncao">Listagem de usuários</h3>
+<h2 class="Plinha">Listagem de usuários</h2>
 <br>
 
+<div class="Plinha">
 <table class="table table-striped table-bordered table-hover">
     <thead>
-        <th style="text-align:center">Id do Usuário</th>
-        <th style="text-align:center">Nome</th>
-        <th style="text-align:center">CPF</th>
-        <th style="text-align:center">Função no sistema</th>
-        <th style="text-align:center">Senha</th>
-        <th style="text-align:center">Ações</th>
+        <th class="Plinha">Id do Usuário</th>
+        <th class="Plinha">Nome</th>
+        <th class="Plinha">CPF</th>
+        <th class="Plinha">Função no sistema</th>
+        <th class="Plinha">Senha</th>
+        <th class="Plinha">Ações</th>
     </thead>
     <tbody>
         @foreach ($usuarios as $u)
             <tr>
-                <td style="text-align:center">{{ $u->idFunc }}</td>
-                <td style="text-align:center">{{ $u->nomeFunc }}</td>
-                <td style="text-align:center">{{ $u->cpfFunc }}</td>
-                <td style="text-align:center">
+                <td class="Plinha">{{ $u->idFunc }}</td>
+                <td class="Plinha">{{ $u->nomeFunc }}</td>
+                <td class="Plinha">{{ $u->cpfFunc }}</td>
+                <td class="Plinha">
                 @if( $u->funcaoSistema == "C")
                 Cozinha
                 @else
                 Atendente
                 @endif
                 </td>
-                <td style="text-align:center">{{ $u->senha }}</td>
+                <td class="Plinha">{{ $u->senha }}</td>
                 <td>
                 <form action="/createUser/{{ $u->idFunc }}/edit" method="POST">
                 @csrf
@@ -37,5 +38,6 @@
         @endforeach
     </tbody>
 </table>
+</div>
 
 @endsection

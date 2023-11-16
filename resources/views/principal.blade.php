@@ -1,5 +1,5 @@
 @extends('layout.main')
-
+<div class="img">
 @section('conteudo')
 <div class="container text-center">
   <div class="row justify-content-md-center">

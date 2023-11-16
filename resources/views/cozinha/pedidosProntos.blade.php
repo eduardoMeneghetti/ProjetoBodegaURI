@@ -1,25 +1,25 @@
 @extends('layout.main')
-
+<div class="img">
 @section('conteudo')
-<h3 class="tituloFuncao">Pedidos Prontos</h3>
+<h2 class="Plinha">Pedidos Prontos</h2>
 <br>
 
 <table class="table table-striped table-bordered table-hover">
     <thead>
-        <th style="text-align:center">Pedido</th>
-        <th style="text-align:center">Data e hora</th>
-        <th style="text-align:center">Mesa</th>
-        <th style="text-align:center">Observações</th>
-        <th style="text-align:center">Nome do Produto</th>
+        <th class="Plinha">Pedido</th>
+        <th class="Plinha">Data e hora</th>
+        <th class="Plinha">Mesa</th>
+        <th class="Plinha">Observações</th>
+        <th class="Plinha">Nome do Produto</th>
     </thead>
     <tbody>
         @foreach ($pedidos as $p)
             <tr>
-                <td style="text-align:center">{{ $p->idPed }}</td>
-                <td style="text-align:center">{{ $p->dataPedidoFormatada }}</td>
-                <td style="text-align:center">{{ $p->mesa }}</td>
-                <td style="text-align:center">{{ $p->obsPed }}</td>
-                <td style="text-align:center">{{ $p->nomeProd }}</td>
+                <td class="Plinha">{{ $p->idPed }}</td>
+                <td class="Plinha">{{ $p->dataPedidoFormatada }}</td>
+                <td class="Plinha">{{ $p->mesa }}</td>
+                <td class="Plinha">{{ $p->obsPed }}</td>
+                <td class="Plinha">{{ $p->nomeProd }}</td>
             </tr>
         @endforeach
     </tbody>

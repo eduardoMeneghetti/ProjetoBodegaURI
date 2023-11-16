@@ -24,8 +24,8 @@
         {{ session('erro') }}
     </div>
 @endif
-<h1 class="tituloP">Bodega Software</h1>
-<p class="tituloP">Seu software de gerenciamento</p>
+<h1 class="Plinha">Bodega Software</h1>
+<p class="Plinha">Seu software de gerenciamento</p>
 <section class="vh-100 gradient-custom">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">

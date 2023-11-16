@@ -1,10 +1,10 @@
 @extends('layout.main')
-
+<div class="img">
 @section('conteudo')
 <form action="/fazerpedido" method="POST">
     @csrf
     {{-- RETORNOS AO USUÁRIO AO FINALIZAR O PEDIDO(SUPERIOR PÁGINA) --}}
-    <h4 class="tituloFuncao">Produtos com estoque</h4>
+    <h2 class="Plinha">Produtos com estoque</h2>
     <br>
     @if(session('pedidoEnviado'))
     <div class="alert alert-success">
@@ -38,11 +38,11 @@
     @error('erroValorT')
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-    <h3>Lista de comidas</h3>
+    <h4 class="Plinha">Lista de comidas</h4>
     <div class="list-group">
         @foreach($produtos as $p)
             @if($p->tipo==='C')
-            <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex justify-content-between align-items-center Plinha">
                 <label>
                     <input type="checkbox" name="idProd[]" value="{{ $p->idProd }}">
                     {{ $p->nomeProd }}
@@ -53,11 +53,11 @@
         @endforeach
     </div>
     <br>
-    <h3>Lista de Bebidas</h3>
+    <h4 class="Plinha">Lista de Bebidas</h4>
     <div class="list-group">
         @foreach($produtos as $p)
             @if($p->tipo==='B')
-            <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex justify-content-between align-items-center Plinha">
                 <label>
                     <input type="checkbox" name="idProd[]" value="{{ $p->idProd }}">
                     {{ $p->nomeProd }}
@@ -68,11 +68,11 @@
         @endforeach
     </div>
     <br>
-    <div class="mb-3">
+    <div class="LPlinha">
         <label for="exampleFormControlInput1" class="form-label"><h3>Mesa<h3></label>
         <input type="number" name="mesa" class="form-control" id="exampleFormControlInput1">
     </div>
-    <div class="mb-3">
+    <div class="LPlinha">
         <label for="exampleFormControlTextarea1" class="form-label"><h3>Observações do pedido</h3></label>
         <textarea class="form-control" name="obsPed" id="exampleFormControlTextarea1" rows="3"></textarea>
     </div>

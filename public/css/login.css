@@ -1,12 +1,19 @@
 *{
     font-family: 'Roboto';
+    font-size: 20px;
 }
 
 .principal{
-    background-color: #DAA520;
+    background-image: url(../image/the-curve-by-genuwine-cellars-genuwine-cellars-img~d291737e076d3fb7_14-9340-1-ff40c53.jpg);
 }
 
 .tituloP{
     text-align: left;
     margin-left: 10px;
+}
+
+.Plinha{
+    background-image: none;
+    text-align: left;
+    color: white;
 }

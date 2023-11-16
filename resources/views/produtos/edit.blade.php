@@ -1,33 +1,33 @@
 @extends('layout.main')
-
+<div class="img">
 @section('conteudo')
-    <h1>Edição de Produtos<h1>
+    <h2 class="Plinha">Edição de Produtos<h2>
     <br>
     <form action="{{  route('produtos-update',['idProd'=>$produtos->idProd])  }}" method="post">
     @csrf
     @method('PUT')
-        <div class="form-group">
+        <div class="form-group LPlinha">
             <label for="nomeProd"> Nome do produto: </label>
             <input type="text" class="form-control" id="nomeProd" name="nomeProd" placeholder="Nome do produto" value='{{ $produtos->nomeProd }}'>
             @error('nomeProd')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
-        <div class="form-group">
+        <div class="form-group LPlinha">
             <label for="precoProd"> Preço do produto: </label>
             <input type="number" step="0.01" class="form-control" id="precoProd" name="precoProd" placeholder="Preço unitário produto" value='{{ $produtos->precoProd }}'>
             @error('precoProd')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
-        <div class="form-group">
+        <div class="form-group LPlinha">
             <label class="form-check-label">Descrição do Produto</label>
             <textarea name="descricaoProd" id="descricaoProd" class="form-control" placeholder="peso, etc, etc" >{{ $produtos->descricaoProd }}</textarea>
             @error('descricaoProd')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
-        <div class="form-check form-switch">
+        <div class="form-check form-switch LPlinha">
         <input class="form-check-input" type="checkbox" role="switch" name="ativo" id="ativo" value='{{ $produtos->ativo }}'>
         <label class="form-check-label" for="flexSwitchCheckDefault">ativo</label>
 

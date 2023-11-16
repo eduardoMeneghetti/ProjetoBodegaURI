@@ -1,32 +1,32 @@
 @extends('layout.main')
-
+<div class="img">
 @section('conteudo')
-    <h1>Cadastro de produtos<h1>
+    <h2 class="Plinha">Cadastro de produtos<h2>
     <br>
     <form action="/create" method="post">
     @csrf
-        <div class="form-group">
+        <div class="form-group LPlinha">
             <label for="nomeProd"> Nome do produto: </label>
             <input type="text" class="form-control" id="nomeProd" name="nomeProd" placeholder="Nome do produto">
             @error('nomeProd')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
-        <div class="form-group">
+        <div class="form-group LPlinha">
             <label for="precoProd"> Preço do produto: </label>
             <input type="number" step="0.01" class="form-control" id="precoProd" name="precoProd" placeholder="Preço unitário produto">
             @error('precoProd')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
-        <div class="form-group">
+        <div class="form-group LPlinha">
             <label class="form-check-label">Descrição do Produto</label>
             <textarea name="descricaoProd" id="descricaoProd" class="form-control" placeholder="peso, etc, etc"></textarea>
             @error('descricaoProd')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
-        <div class="form-check form-switch">
+        <div class="form-check form-switch LPlinha">
         <input class="form-check-input" type="checkbox" role="switch" name="ativo" id="ativo" value="0">
         <label class="form-check-label" for="flexSwitchCheckDefault">ativo</label>
 
@@ -68,7 +68,7 @@
     </script>
 
     <br>
-        <div class="form-group">
+        <div class="form-group ">
         <select name="tipo" class="form-select" aria-label="Default select example">
         <option selected>Tipo do produto</option>
         <option value="C">Comida</option>
