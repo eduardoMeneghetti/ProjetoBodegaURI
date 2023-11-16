@@ -36,12 +36,29 @@ class ProdutosController extends Controller
     }
 
 
-    public function editar($id)
+    public function edit($id)
     {
 
-        $produto = Produto::find($id);
+        $produto = Produto::where('idProd',$id)->first();
+        if(!empty($produto)){
+            return view('produtos.edit', ['produtos'=>$produto]);
+        }else{
+           return redirect()->route('produtos-index');
+        }
+        
+    }
 
-        return view('produtos.editar', compact('produto'));
+    public function update(Request $request, $id){
+        $ativo = $request->input('ativo') ? 1 : 0;
+        $data = [
+            'nomeProd' => $request->nomeProd,
+            'precoProd' => $request->precoProd,
+            'descricaoProd' => $request->descricaoProd,
+            'ativo' => $ativo,
+            'tipo' => $request->tipo
+        ];
+        Produto::where('idProd', $id) -> update($data);
+        return redirect()->route('produtos-index');
     }
 
 

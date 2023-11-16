@@ -35,8 +35,10 @@ Route::post('/create',[ProdutosController::class,'store']);
 //Formulario para movimentação de estoque :P
 Route::get('/movimentacao',[ProdutosController::class,'movimentacao']);
 Route::post('/movimentacao', [ProdutosController::class,'movimentacaoEstoque']);
-Route::get('/produtos/{idProd}/editar', [ProdutosController::class,'editar']);
-Route::patch('/produtos/{id}/atualizar', [ProdutosController::class,'atualizar']);
+
+//Formulario para edição de produtos
+Route::get('/{idProd}/edit', [ProdutosController::class,'edit'])-> where('idProd', '[0-9]+') -> name('produtos-edit');
+Route::put('/{idProd}', [ProdutosController::class,'update'])-> where('idProd', '[0-9]+') -> name('produtos-update');
 
 //rotas de referencia a cozinha alteração de status
 Route::get('/pedidos',[CozinhaController::class,'index']);
@@ -50,7 +52,7 @@ Route::view('/principal','principal');
 Route::view('/SemPagina','semPagina');
 
 //Página da listagem de produtos
-Route::get('/index',[ProdutosController::class,'index']);
+Route::get('/index',[ProdutosController::class,'index'])-> name('produtos-index');
 Route::post('/index',[ProdutosController::class,'edit']);
 
 //rotas de referencia a pedidos

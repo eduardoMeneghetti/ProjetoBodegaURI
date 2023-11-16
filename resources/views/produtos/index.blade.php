@@ -21,7 +21,7 @@
                         @endif
                     </td>
                     <td>{{ $p->qtdEst }}</td>
-                    <td><a href="{{ route('produtos.editar', ['idProd' => $p->idProd]) }}" class="btn btn-success">Editar</a>
+                    <td><a href="{{ route('produtos-edit', ['idProd'=> $p->idProd]) }}" class="btn btn-success">Editar</a>
                 </tr>
             @endforeach
         </table>
