@@ -2,6 +2,11 @@
 <div class="img">
 @section('conteudo')
     <h2 class="Plinha">Cadastro de produtos<h2>
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
     <br>
     <form action="/create" method="post">
     @csrf
@@ -74,6 +79,9 @@
         <option value="C">Comida</option>
         <option value="B">Bebida</option>
         </select>
+        @error('tipo')
+        <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         </div>
         <div class="botao">
         <input type="submit" class="btn btn-primary" value="cadastrar">

@@ -5,6 +5,7 @@
   <div class="row justify-content-md-center">
     <div class="col-md-auto">
     <a type="button" href="/create" class="btn btn-primary btn-block">Cadastro de produtos</a><br>
+    <a type="button" href="/index" class="btn btn-primary btn-block">Listagem de produtos</a><br>
     <a type="button" href="/movimentacao" class="btn btn-primary btn-block">Lançamento de estoque</a><br>
     <a type="button" href="/pedidosAdm" class="btn btn-primary btn-block">Pedidos em espera</a><br>
     <a type="button" href="/pedidosProntos" class="btn btn-primary btn-block">Pedidos liberados</a><br>

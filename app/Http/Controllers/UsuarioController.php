@@ -42,7 +42,7 @@ class UsuarioController extends Controller
             'nomeUser.required' => 'Nome do Usuário não foi preenchido',
             'cpfUser.required' => 'CPF do Usuário não foi preenchido',
             'funcaoUser.required' => 'Função do Usuário não foi preenchida',
-            'senhaUser.requride' => 'Senha do Usuário não foi preenchido'
+            'senhaUser.requrided' => 'Senha do Usuário não foi preenchido'
         ]);
 
         $funcionario = new Funcionario( [

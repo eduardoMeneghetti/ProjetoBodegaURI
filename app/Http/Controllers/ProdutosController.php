@@ -45,7 +45,7 @@ class ProdutosController extends Controller
         }else{
            return redirect()->route('produtos-index');
         }
-        
+
     }
 
     public function update(Request $request, $id){
@@ -111,6 +111,7 @@ class ProdutosController extends Controller
             'precoProd.required' => 'O campo Preço do Produto é obrigatório.',
             'precoProd.numeric' => 'O campo Preço do Produto deve ser um número.',
             'descricaoProd.required' => 'O campo Descrição é obrigatório.',
+            'tipo' => 'O campo tipo é obrigatório',
         ];
 
         $validator = Validator::make($request->all(), [
