@@ -1,10 +1,10 @@
-@extends('layout.main')
+@extends('layout.mainAC')
 <div class="img">
 @section('conteudo')
 <form action="/fazerpedido" method="POST">
     @csrf
     {{-- RETORNOS AO USUÁRIO AO FINALIZAR O PEDIDO(SUPERIOR PÁGINA) --}}
-    <h2 class="Plinha">Produtos com estoque</h2>
+    <h2 class="Plinha">Pedidos</h2>
     <br>
     @if(session('pedidoEnviado'))
     <div class="alert alert-success">
@@ -76,6 +76,7 @@
         <label for="exampleFormControlTextarea1" class="form-label"><h3>Observações do pedido</h3></label>
         <textarea class="form-control" name="obsPed" id="exampleFormControlTextarea1" rows="3"></textarea>
     </div>
+    <p style="color:white">*Nesta página somente pedidos com estoque</p>
     <input class="btn btn-primary" type="submit" value="enviar">
 </form>
 <br>

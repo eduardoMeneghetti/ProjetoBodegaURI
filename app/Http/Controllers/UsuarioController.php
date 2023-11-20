@@ -103,6 +103,18 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'nomeUser' => 'required',
+            'cpfUser' => 'required',
+            'funcaoUser' => 'required',
+            'senhaUser' => 'required'
+        ], [
+            'nomeUser.required' => 'Nome do Usuário não foi preenchido',
+            'cpfUser.required' => 'CPF do Usuário não foi preenchido',
+            'funcaoUser.required' => 'Função do Usuário não foi preenchida',
+            'senhaUser.requrided' => 'Senha do Usuário não foi preenchido'
+        ]);
+
             $data = [
                 'nomeFunc'=> $request->nomeUser,
                 'cpfFunc'=> $request->cpfUser,

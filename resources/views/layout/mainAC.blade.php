@@ -20,9 +20,6 @@
 </head>
     <h1 class="tituloP">Bodega Software</h1>
     <p class="tituloP">Seu software de gerenciamento</p>
-    <div style="margin-left:10px">
-    <a type="button" href="/principal" class="btn btn-info">Voltar</a><br>
-    </div>
     <br>
     <br>
     <div class="container">

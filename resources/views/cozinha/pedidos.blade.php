@@ -1,7 +1,7 @@
-@extends('layout.main')
+@extends('layout.mainAC')
 <div class="img">
 @section('conteudo')
-<h2 class="Plinha">Pedidos aguardando</h2>
+<h2 class="Plinha">Pedidos em espera</h2>
 <br>
 
 <div class="Plinha">

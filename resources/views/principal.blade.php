@@ -1,4 +1,4 @@
-@extends('layout.main')
+@extends('layout.mainAC')
 <div class="img">
 @section('conteudo')
 <div class="container text-center">

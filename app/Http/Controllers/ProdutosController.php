@@ -49,6 +49,27 @@ class ProdutosController extends Controller
     }
 
     public function update(Request $request, $id){
+        $messages = [
+            'nomeProd.required' => 'O campo Nome do Produto é obrigatório.',
+            'precoProd.required' => 'O campo Preço do Produto é obrigatório.',
+            'precoProd.numeric' => 'O campo Preço do Produto deve ser um número.',
+            'descricaoProd.required' => 'O campo Descrição é obrigatório.',
+            'tipo' => 'O campo tipo é obrigatório',
+        ];
+
+        $validator = Validator::make($request->all(), [
+            'nomeProd' => 'required',
+            'precoProd' => 'required|numeric',
+            'descricaoProd' => 'required',
+            'tipo' => 'required'
+        ], $messages);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $ativo = $request->input('ativo') ? 1 : 0;
         $data = [
             'nomeProd' => $request->nomeProd,
